@@ -1,33 +1,49 @@
 import re
 
-
-
 def read_template(Filepath):
-   
-        with open(Filepath)as file:
-            return file.read()
+   """
+   This function used to open and read a file
+   """
+   with open(Filepath)as file:
+     return file.read()
 
-
-
-def parse_template(name):
-  testing=re.findall(r'{(.*?)}',name)
+def parse_template(textContent):
+  """
+    This function used parse the text into usable one
+  """
+  testing=re.findall(r'{(.*?)}',textContent)
   x= tuple(testing)
-  testing1=re.sub(r'{(.*?)}',"{}",name)
+  testing1=re.sub(r'{(.*?)}',"{}",textContent)
 
   return testing1,x
 
 
-def merge(file:str,x):
-   
-    testing1=file.format(*x)
+def merge(file,inputs):
+    """
+    This function used to merge the values from user input to the correct place
+    """
+
+
+    testing1=file.format(*inputs)
     return testing1
 
-def write_new_file(content: str):
+def write_new_file(content):
+    """
+    This function write content wanted to a new file or override that file content
+    """
     with open('assets/video_game_result.txt', 'w') as video_game:
         video_game.write(content)
 
 
 if __name__=="__main__":
+
+    print("""
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                   Welcome to madlib Game in here you will enter
+     some Adjectives and nouns to finally display the text contained the names u chose
+     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    """
+    )
     words=read_template("assets/video_game.txt")
     testing=re.findall(r'{(.*?)}',words)
 
@@ -49,15 +65,6 @@ if __name__=="__main__":
 
     write_new_file(merge(textModify,arrayWanted2))
   
-
-
-
-
-
-
-
-
-
 
 
 # text1=text.split(" ")
